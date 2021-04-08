@@ -11,3 +11,4 @@ Sovelluksen ominaisuuksia ovat:
 - Käyttäjä voi seurata tulosten kehitystä.
 - Käyttäjä voi hakea hakusanalla haluamaansa treeniä treenin nimen, kategorian tai ajankohdan mukaan.
 - Käyttäjä voi halutessaan poistaa tuloksia.
+- Käyttäjä voi nähdä muiden käyttäjien treenejä ja kommentoida niitä.
