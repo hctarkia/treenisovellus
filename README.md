@@ -12,3 +12,5 @@ Sovelluksen ominaisuuksia ovat:
 - Käyttäjä voi hakea hakusanalla haluamaansa treeniä treenin nimen, kategorian tai ajankohdan mukaan.
 - Käyttäjä voi halutessaan poistaa tuloksia.
 - Käyttäjä voi nähdä muiden käyttäjien treenejä ja kommentoida niitä.
+
+Sovellus [Herokussa](https://treenisovellus.herokuapp.com/)
