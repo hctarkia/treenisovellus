@@ -1,5 +1,8 @@
 {% if session.user_id %}
 <p>Olet kirjautunut nimellä {{ session.username }}</p>
+<a href="/new">Lisää treeni</a>
+<a href="/profile">Oma profiili</a>
+<a href="/search">Hae treenejä</a>
 <a href="/logout">Kirjaudu ulos</a>
 {% else %}
 <a href="/login">Kirjaudu sisään</a>

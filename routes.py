@@ -35,3 +35,15 @@ def register():
         else:
             return render_template("error.html",message="Rekisteröinti ei onnistunut")
 
+@app.route("/new", methods=["POST"])
+def new():
+    return render_template("new.html")
+
+@app.route("/result")
+def result():
+    query = request.args["query"]
+    sql = "SELECT jotain, jotain FROM workouts WHERE mikä LIKE :query"
+    result = db.session.execute(sql, {"query":"%"+query+"%"})
+    workouts = result.fetchall()
+    return render_template("result.html",workouts=workouts)
+
