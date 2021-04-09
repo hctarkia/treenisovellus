@@ -42,8 +42,18 @@ def new():
 @app.route("/result")
 def result():
     query = request.args["query"]
-    sql = "SELECT jotain, jotain FROM workouts WHERE mikä LIKE :query"
+    sql = "SELECT date, workout, duration, description FROM workouts WHERE workout LIKE :query"
     result = db.session.execute(sql, {"query":"%"+query+"%"})
     workouts = result.fetchall()
     return render_template("result.html",workouts=workouts)
 
+@app.route("/add", methods=["POST"])
+def add():
+
+@app.route("/profile")
+def profile():
+    return render_template("profile.html")
+
+@app.route("/search")
+def search():
+    return render_template("search.html")
