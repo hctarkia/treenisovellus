@@ -7,6 +7,7 @@ CREATE TABLE users (
 CREATE TABLE workouts (
     id SERIAL PRIMARY KEY,
     user_id INTEGER REFERENCES users,
+    date DATE,
     workout TEXT,
     duration INTEGER,
     description TEXT

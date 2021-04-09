@@ -47,8 +47,9 @@ def result():
     workouts = result.fetchall()
     return render_template("result.html",workouts=workouts)
 
-@app.route("/add", methods=["POST"])
-def add():
+#@app.route("/add", methods=["POST"])
+#def add():
+    
 
 @app.route("/profile")
 def profile():
