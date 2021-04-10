@@ -1,6 +1,7 @@
 from app import app
+from db import db
 from flask import render_template, request, redirect
-import users
+import users, workouts
 
 @app.route("/")
 def index():
@@ -35,21 +36,31 @@ def register():
         else:
             return render_template("error.html",message="Rekisteröinti ei onnistunut")
 
-@app.route("/new", methods=["POST"])
+@app.route("/new")
 def new():
     return render_template("new.html")
 
 @app.route("/result")
 def result():
     query = request.args["query"]
-    sql = "SELECT date, workout, duration, description FROM workouts WHERE workout LIKE :query"
+    sql = "SELECT u.username, w.date, w.workout, w.duration, w.description FROM users u, workouts w WHERE u.id=w.user_id AND workout LIKE :query"
     result = db.session.execute(sql, {"query":"%"+query+"%"})
-    workouts = result.fetchall()
-    return render_template("result.html",workouts=workouts)
+    results = result.fetchall()
+    return render_template("result.html",results=results)
 
-#@app.route("/add", methods=["POST"])
-#def add():
-    
+@app.route("/add", methods=["POST"])
+def add():
+    workout = request.form["workout"]
+    duration = request.form["duration"]
+    description = request.form["description"]
+    if len(workout) > 100:
+        return render_template("error.html", message="Liian pitkä harjoituksen nimi")
+    if len(description) > 5000:
+        return render_template("error.html", message="Liian pitkä kuvaus")
+    if workouts.add(workout, duration, description):
+        return redirect("/")
+    else:
+        return render_template("error.html", message="Lisäys ei onnistunut")
 
 @app.route("/profile")
 def profile():

@@ -1,0 +1,14 @@
+<!doctype html>
+<title>Treenisovellus - {% block title %}{% endblock %}</title>
+<h1>Treenisovellus</h1>
+{% if session.user_id %}
+<a href="/">Etusivu</a>
+<a href="/new">Lisää treeni</a>
+<a href="/search">Hae treenejä</a>
+<a href="/profile">Oma profiili</a>
+<a href="/logout">Kirjaudu ulos</a>
+{% else %}
+<a href="/login">Kirjaudu sisään</a>
+{% endif %}
+<hr>
+{% block content %}{% endblock %}

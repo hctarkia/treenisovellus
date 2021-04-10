@@ -1,10 +1,10 @@
-<h2>TREENISOVELLUS</h2>
+{% extends "layout.html" %}
+{% block title %}Etusivu{% endblock %}
+{% block content %}
+<h2>Etusivu</h2>
 {% if session.user_id %}
 <p>Olet kirjautunut nimellä {{ session.username }}</p>
-<a href="/new">Lisää treeni</a>
-<a href="/profile">Oma profiili</a>
-<a href="/search">Hae treenejä</a>
-<a href="/logout">Kirjaudu ulos</a>
 {% else %}
-<a href="/login">Kirjaudu sisään</a>
+<p>Kirjaudu sisään käyttääksesi sovellusta</p>
 {% endif %}
+{% endblock %}

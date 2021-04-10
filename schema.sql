@@ -10,5 +10,6 @@ CREATE TABLE workouts (
     date DATE,
     workout TEXT,
     duration INTEGER,
-    description TEXT
+    description TEXT,
+    visible INTEGER
 );

@@ -1,3 +1,6 @@
+{% extends "layout.html" %}
+{% block title %}Lisää harjoitus{% endblock %}
+{% block content %}
 <h2>Lisää harjoitus</h2>
 <form action="/add" method="POST">
 <label for="workout">Harjoitus:</label><br>
@@ -8,3 +11,4 @@
 <textarea name="description" rows="3" cols="40"></textarea><br>
 <input type="submit" value="Lisää">
 </form>
+{% endblock %}
