@@ -1,9 +1,12 @@
-<!doctype html>
-<link rel="stylesheet" href="style.css">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<!DOCTYPE html>
+
+<head>
+    <link rel="stylesheet" href="style.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Treenisovellus - {% block title %}{% endblock %}</title>
+</head>
 
 <body>
-    <title>Treenisovellus - {% block title %}{% endblock %}</title>
     <h1>Treenisovellus</h1>
     {% if session.user_id %}
     <nav>
