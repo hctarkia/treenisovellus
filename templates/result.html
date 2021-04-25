@@ -2,6 +2,7 @@
 {% block title %}Tulokset{% endblock %}
 {% block content %}
 <h2>Tulokset</h2>
+<hr>
 {% for workout in results %}
 Käyttäjä: {{ workout[0] }}
 Päiväys: {{ workout[1] }}
@@ -9,5 +10,6 @@ Päiväys: {{ workout[1] }}
 Harjoitus: {{ workout[2] }} Kesto: {{ workout[3] }}
 <p>
 Kuvaus: {{ workout[4] }}
+<hr>
 {% endfor %}
 {% endblock %}

@@ -2,4 +2,15 @@
 {% block title %}Oma profiili{% endblock %}
 {% block content %}
 <h2>Oma profiili<h2>
+<hr>
+<h1>Omat treenit</h1>
+{% for workout in results %}
+Käyttäjä: {{ workout[0] }}
+Päiväys: {{ workout[1] }}
+<p>
+Harjoitus: {{ workout[2] }} Kesto: {{ workout[3] }}
+<p>
+Kuvaus: {{ workout[4] }}
+<hr>
+{% endfor %}
 {% endblock %}

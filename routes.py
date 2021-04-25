@@ -64,7 +64,11 @@ def add():
 
 @app.route("/profile")
 def profile():
-    return render_template("profile.html")
+    user = request.args["user"]
+    sql = "SELECT u.username, w.date, w.workout, w.duration, w.description FROM users u, workouts w WHERE u.id=w.user_id AND u.id=:user"
+    result = db.session.execute(sql, {"user":users.user_id})
+    results = result.fetchall()
+    return render_template("profile.html", results=results)
 
 @app.route("/search")
 def search():
