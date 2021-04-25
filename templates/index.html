@@ -5,7 +5,8 @@
 {% if session.user_id %}
 <p>Olet kirjautunut nimellä {{ session.username }}</p>
 <hr>
-<h1>Kaikki treenit</h1>
+<h3>Kaikki treenit</h3>
+<hr>
 {% for workout in results %}
 Käyttäjä: {{ workout[0] }} | Päiväys: {{ workout[1] }}
 <p>
