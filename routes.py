@@ -5,7 +5,10 @@ import users, workouts
 
 @app.route("/")
 def index():
-    return render_template("index.html")
+    sql = "SELECT u.username, w.date, w.workout, w.duration, w.description FROM users u, workouts w WHERE u.id=w.user_id ORDER BY w.id DESC"
+    result = db.session.execute(sql)
+    results = result.fetchall()
+    return render_template("index.html", results=results)
 
 @app.route("/login", methods=["GET","POST"])
 def login():
@@ -43,7 +46,7 @@ def new():
 @app.route("/result")
 def result():
     query = request.args["query"]
-    sql = "SELECT u.username, w.date, w.workout, w.duration, w.description FROM users u, workouts w WHERE u.id=w.user_id AND workout LIKE :query"
+    sql = "SELECT u.username, w.date, w.workout, w.duration, w.description FROM users u, workouts w WHERE u.id=w.user_id AND workout LIKE :query ORDER BY w.id DESC"
     result = db.session.execute(sql, {"query":"%"+query+"%"})
     results = result.fetchall()
     return render_template("result.html",results=results)
@@ -69,7 +72,7 @@ def add():
 @app.route("/profile")
 def profile():
     user = users.user_id
-    sql = "SELECT u.username, w.date, w.workout, w.duration, w.description FROM users u, workouts w WHERE u.id=w.user_id AND u.id=:user"
+    sql = "SELECT u.username, w.date, w.workout, w.duration, w.description FROM users u, workouts w WHERE u.id=w.user_id AND u.id=:user ORDER BY w.id DESC"
     result = db.session.execute(sql, {"user":user})
     results = result.fetchall()
     return render_template("profile.html", results=results)
