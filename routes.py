@@ -72,8 +72,8 @@ def add():
 @app.route("/profile")
 def profile():
     user = users.user_id()
-    sql = "SELECT u.username, w.date, w.workout, w.duration, w.description FROM users u, workouts w WHERE u.id=w.user_id AND u.id='"+user+"' ORDER BY w.id DESC"
-    result = db.session.execute(sql)
+    sql = "SELECT u.username, w.date, w.workout, w.duration, w.description FROM users u, workouts w WHERE u.id=w.user_id AND u.id=:user ORDER BY w.id DESC"
+    result = db.session.execute(sql, {"user":user})
     results = result.fetchall()
     return render_template("profile.html",results=results)
 
