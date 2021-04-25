@@ -8,7 +8,7 @@ def index():
     sql = "SELECT u.username, w.date, w.workout, w.duration, w.description FROM users u, workouts w WHERE u.id=w.user_id ORDER BY w.id DESC"
     result = db.session.execute(sql)
     results = result.fetchall()
-    return render_template("index.html", results=results)
+    return render_template("index.html",results=results)
 
 @app.route("/login", methods=["GET","POST"])
 def login():
@@ -57,25 +57,25 @@ def add():
     duration = request.form["duration"]
     description = request.form["description"]
     if len(workout) > 100:
-        return render_template("error.html", message="Liian pitkä harjoituksen nimi")
+        return render_template("error.html",message="Liian pitkä harjoituksen nimi")
     elif len(workout) == 0:
-        return render_template("error.html", message="Lisää treenin nimi")
+        return render_template("error.html",message="Lisää treenin nimi")
     if len(description) > 5000:
-        return render_template("error.html", message="Liian pitkä kuvaus")
+        return render_template("error.html",message="Liian pitkä kuvaus")
     if duration < 1:
-        return render_template("error.html", message="Lisää treenin kesto")
+        return render_template("error.html",message="Lisää treenin kesto")
     if workouts.add(workout, duration, description):
         return redirect("/")
     else:
-        return render_template("error.html", message="Lisäys ei onnistunut")
+        return render_template("error.html",message="Lisäys ei onnistunut")
 
 @app.route("/profile")
 def profile():
-    user = users.user_id
+    user = users.user_id()
     sql = "SELECT u.username, w.date, w.workout, w.duration, w.description FROM users u, workouts w WHERE u.id=w.user_id AND u.id='"+user+"' ORDER BY w.id DESC"
     result = db.session.execute(sql)
     results = result.fetchall()
-    return render_template("profile.html", results=results)
+    return render_template("profile.html",results=results)
 
 @app.route("/search")
 def search():
