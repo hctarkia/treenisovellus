@@ -15,4 +15,6 @@ Sovelluksen ominaisuuksia ovat:
 
 Sovellus [Herokussa](https://treenisovellus.herokuapp.com/)
 
-Sovellukseen voi nyt rekisteröityä ja kirjautua. Treenejä voi lisätä ja niitä voi hakea treenin nimellä.
+Sovellukseen voi rekisteröityä ja kirjautua. Treenejä voi lisätä ja niitä voi hakea treenin nimellä. Etusivulla näkyy nyt kaikki lisätyt
+treenit ja omasta profiilista löytyy kaikki omat treenit. Ulkoasun suunnittelu on aloitettu, mutta sovelluksen testattavan version
+ulkoasussa se ei vielä näy toteutuksessa tulleiden ongelmien takia.
