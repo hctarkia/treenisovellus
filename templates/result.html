@@ -9,6 +9,13 @@ Käyttäjä: {{ workout[0] }} | Päiväys: {{ workout[1] }}
 Harjoitus: {{ workout[2] }} | Kesto: {{ workout[3] }}
 <p>
 Kuvaus: {{ workout[4] }}
+<p>
+<input type="hidden" name="workout_id" value="workout[5]">
+<a href="/show">Näytä kommentit</a>
+<a href="/comment">Lisää kommentti</a>
+{% if session.user_id == workout[0] %}
+<a href="/delete">Poista harjoitus</a>
+{% endif %}
 <hr>
 {% endfor %}
 {% endblock %}

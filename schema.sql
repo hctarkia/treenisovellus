@@ -13,3 +13,12 @@ CREATE TABLE workouts (
     description TEXT,
     visible INTEGER
 );
+
+CREATE TABLE comments (
+    id SERIAL PRIMARY KEY,
+    user_id INTEGER REFERENCES users,
+    workout_id INTEGER REFERENCES workouts,
+    date DATE,
+    comment TEXT,
+    visible INTEGER
+);

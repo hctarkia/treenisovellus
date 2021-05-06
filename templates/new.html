@@ -10,5 +10,6 @@
 <label for="description">Kuvaus:</label><br>
 <textarea name="description" rows="3" cols="40"></textarea><br>
 <input type="submit" value="Lisää">
+<input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
 </form>
 {% endblock %}

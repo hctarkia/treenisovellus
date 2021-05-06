@@ -5,9 +5,7 @@ import users, workouts
 
 @app.route("/")
 def index():
-    sql = "SELECT u.username, w.date, w.workout, w.duration, w.description FROM users u, workouts w WHERE u.id=w.user_id ORDER BY w.id DESC"
-    result = db.session.execute(sql)
-    results = result.fetchall()
+    results = workouts.get_list()
     return render_template("index.html",results=results)
 
 @app.route("/login", methods=["GET","POST"])
@@ -33,7 +31,15 @@ def register():
         return render_template("register.html")
     if request.method == "POST":
         username = request.form["username"]
+        if len(username) < 3:
+            return render_template("error.html",message="Liian lyhyt käyttäjänimi. Sallittu pituus 3-20 merkkiä.")
+        elif len(username) > 20:
+            return render_template("error.html",message="Liian pitkä käyttäjänimi. Sallittu pituus 3-20 merkkiä.")
         password = request.form["password"]
+        if len(password) < 8:
+            return render_template("error.html",message="Liian lyhyt salasana. Sallittu pituus 8-20 merkkiä.")
+        elif len(password) > 20:
+            return render_template("error.html",message="Liian pitkä salasana. Sallittu pituus 8-20 merkkiä.")
         if users.register(username,password):
             return redirect("/")
         else:
@@ -46,20 +52,24 @@ def new():
 @app.route("/result")
 def result():
     query = request.args["query"]
-    sql = "SELECT u.username, w.date, w.workout, w.duration, w.description FROM users u, workouts w WHERE u.id=w.user_id AND workout LIKE :query ORDER BY w.id DESC"
-    result = db.session.execute(sql, {"query":"%"+query+"%"})
-    results = result.fetchall()
+    if len(query) == 0:
+        return render_template("error.html",message="Lisää hakusana")
+    elif len(query > 100):
+        return render_template("error.html",message="Liian pitkä hakusana")
+    results = workouts.search(query)
     return render_template("result.html",results=results)
 
 @app.route("/add", methods=["POST"])
 def add():
+    if session["csrf_token"] != request.form["csrf_token"]:
+        return render_template("error.html",message="Yritit jotain kiellettyä")
     workout = request.form["workout"]
     duration = request.form["duration"]
     description = request.form["description"]
     if len(workout) > 100:
         return render_template("error.html",message="Liian pitkä harjoituksen nimi")
     elif len(workout) == 0:
-        return render_template("error.html",message="Lisää treenin nimi")
+        return render_template("error.html",message="Lisää harjoituksen nimi")
     if len(description) > 5000:
         return render_template("error.html",message="Liian pitkä kuvaus")
     if duration < 1:
@@ -71,12 +81,25 @@ def add():
 
 @app.route("/profile")
 def profile():
-    user = users.user_id()
-    sql = "SELECT u.username, w.date, w.workout, w.duration, w.description FROM users u, workouts w WHERE u.id=w.user_id AND u.id=:user ORDER BY w.id DESC"
-    result = db.session.execute(sql, {"user":user})
-    results = result.fetchall()
+    results = workouts.profile()
     return render_template("profile.html",results=results)
 
 @app.route("/search")
 def search():
     return render_template("search.html")
+
+@app.route("/show")
+def show():
+    return render_template("show.html")
+
+@app.route("/comment")
+def comment():
+    workout_id = request.form["workout_id"]
+    
+    return render_template("comment.html")
+
+@app.route("/delete")
+def delete():
+    workout_id = request.form["workout_id"]
+    workouts.delete(workout_id)
+    return redirect("/")

@@ -12,12 +12,15 @@ def login(username,password):
         if check_password_hash(user[0],password):
             session["user_id"] = user[1]
             session["username"] = username
+            session["csrf_token"] = secrets.token_hex(16)
             return True
         else:
             return False
 
 def logout():
     del session["user_id"]
+    del session["username"]
+    del session["csrf_token"]
 
 def register(username,password):
     hash_value = generate_password_hash(password)
