@@ -1,6 +1,6 @@
 from app import app
 from db import db
-from flask import render_template, request, redirect
+from flask import render_template, request, redirect, session
 import users, workouts
 
 @app.route("/")
@@ -61,7 +61,7 @@ def result():
 
 @app.route("/add", methods=["POST"])
 def add():
-    if users.csrf_token != request.form["csrf_token"]:
+    if session["csrf_token"] != request.form["csrf_token"]:
         return render_template("error.html",message="Yritit jotain kiellettyä")
     workout = request.form["workout"]
     duration = request.form["duration"]
