@@ -72,7 +72,7 @@ def add():
         return render_template("error.html",message="Lisää harjoituksen nimi")
     if len(description) > 5000:
         return render_template("error.html",message="Liian pitkä kuvaus")
-    if duration < 1:
+    if int(duration) < 1:
         return render_template("error.html",message="Lisää treenin kesto")
     if workouts.add(workout, duration, description):
         return redirect("/")
@@ -88,15 +88,15 @@ def profile():
 def search():
     return render_template("search.html")
 
-@app.route("/show")
-def show():
-    return render_template("show.html")
+#@app.route("/show")
+#def show():
+#    return render_template("show.html")
 
-@app.route("/comment")
-def comment():
-    workout_id = request.form["workout_id"]
-    
-    return render_template("comment.html")
+#@app.route("/comment")
+#def comment():
+#    workout_id = request.form["workout_id"]
+#
+#    return render_template("comment.html")
 
 @app.route("/delete")
 def delete():
