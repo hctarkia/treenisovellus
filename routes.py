@@ -54,14 +54,14 @@ def result():
     query = request.args["query"]
     if len(query) == 0:
         return render_template("error.html",message="Lisää hakusana")
-    elif len(query > 100):
+    elif len(query) > 100:
         return render_template("error.html",message="Liian pitkä hakusana")
     results = workouts.search(query)
     return render_template("result.html",results=results)
 
 @app.route("/add", methods=["POST"])
 def add():
-    if session["csrf_token"] != request.form["csrf_token"]:
+    if users.csrf_token != request.form["csrf_token"]:
         return render_template("error.html",message="Yritit jotain kiellettyä")
     workout = request.form["workout"]
     duration = request.form["duration"]

@@ -34,3 +34,6 @@ def register(username,password):
 
 def user_id():
     return session.get("user_id",0)
+
+def csrf_token():
+    return session.get("csrf_token",0)
