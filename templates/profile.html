@@ -11,10 +11,18 @@ Harjoitus: {{ workout[2] }} | Kesto: {{ workout[3] }}
 <p>
 Kuvaus: {{ workout[4] }}
 <p>
+<form action="/comment" method="POST">
 <input type="hidden" name="workout_id" value="workout[5]">
-<a href="/show">Näytä kommentit</a>
-<a href="/comment">Lisää kommentti</a>
-<a href="/delete">Poista</a>
+<input type="submit" name="Näytä kommentit">
+</form>
+<form action="/show" method="GET">
+<input type="hidden" name="workout_id" value="workout[5]">
+<input type="submit"name="Lisää kommentti">
+</form>
+<form action="/delete" method="POST">
+<input type="hidden" name="workout_id" value="workout[5]">
+<input type="submit"name="Poista">
+</form>
 <hr>
 {% endfor %}
 {% endblock %}
