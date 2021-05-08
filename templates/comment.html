@@ -6,16 +6,16 @@
 {% if session.user_id %}
 <p>Olet kirjautunut nimellä {{ session.username }}</p>
 <hr>
-{% for workout in workout %}
-Käyttäjä: {{ workout[0] }} | Päiväys: {{ workout[1] }}
+{% for workouts in workout %}
+Käyttäjä: {{ workouts[0] }} | Päiväys: {{ workouts[1] }}
 <p>
-Harjoitus: {{ workout[2] }} | Kesto: {{ workout[3] }}
+Harjoitus: {{ workouts[2] }} | Kesto: {{ workouts[3] }}
 <p>
-Kuvaus: {{ workout[4] }}
+Kuvaus: {{ workouts[4] }}
 <p>
-{% if session.user_id == workout[6] %}
+{% if session.user_id == workouts[6] %}
 <form action="/delete" method="POST">
-<input type="hidden" name="workout_id" value="{{ workout[5] }}">
+<input type="hidden" name="workout_id" value="{{ workouts[5] }}">
 <input type="submit" value="Poista">
 </form>
 {% endif %}
@@ -24,7 +24,7 @@ Kuvaus: {{ workout[4] }}
 <label for="comment">Kommentoi:</label><br>
 <textarea name="comment" rows="3" cols="40"></textarea><br>
 <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
-<input type="hidden" name="workout_id" value="{{ workout[5] }}">
+<input type="hidden" name="workout_id" value="{{ workouts[5] }}">
 <input type="submit" value="Lähetä">
 </form>
 {% endfor %}
