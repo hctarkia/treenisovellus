@@ -26,10 +26,11 @@ Kuvaus: {{ workout[4] }}
 <input type="hidden" name="workout_id" value="{{ workout[5] }}">
 <input type="submit" value="Lähetä">
 </form>
-{% for comment in results %}
-Käyttäjä: {{ comment[0] }} | Päiväys: {{ comment[1] }}
+<hr>
+{% for comments in results %}
+Käyttäjä: {{ comments[0] }} | Päiväys: {{ comments[1] }}
 <p>
-{{ comment[2] }}
+{{ comments[2] }}
 <hr>
 {% endfor %}
 {% else %}

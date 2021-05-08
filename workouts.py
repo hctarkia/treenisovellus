@@ -39,4 +39,4 @@ def get_workout(id):
     sql = "SELECT u.username, w.date, w.workout, w.duration, w.description, w.id, u.id FROM users u, " \
         "workouts w WHERE u.id=w.user_id AND w.id=:id AND w.visible=1"
     result = db.session.execute(sql, {"id":id})
-    return result.fetchall()
+    return result.fetchone()
