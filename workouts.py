@@ -2,7 +2,7 @@ from db import db
 import users
 
 def get_list():
-    sql = "SELECT u.username, w.date, w.workout, w.duration, w.description FROM users u, " \
+    sql = "SELECT u.username, w.date, w.workout, w.duration, w.description, w.id FROM users u, " \
         "workouts w WHERE u.id=w.user_id AND w.visible=1 ORDER BY w.id DESC"
     result = db.session.execute(sql)
     return result.fetchall()
@@ -30,7 +30,7 @@ def search(query):
 
 def profile():
     user = users.user_id()
-    sql = "SELECT u.username, w.date, w.workout, w.duration, w.description FROM users u, " \
+    sql = "SELECT u.username, w.date, w.workout, w.duration, w.description, w.id FROM users u, " \
         "workouts w WHERE u.id=w.user_id AND u.id=:user AND w.visible=1 ORDER BY w.id DESC"
     result = db.session.execute(sql, {"user":user})
     return result.fetchall()
