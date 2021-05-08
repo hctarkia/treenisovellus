@@ -89,14 +89,14 @@ def search():
     return render_template("search.html")
 
 @app.route("/comments")
-def show():
+def comments():
     workout_id = request.form["workout_id"]
     workout = workouts.get_workout(workout_id)
     results = comments.get_comments(workout_id)
     return render_template("comment.html", workout=workout, results=results)
 
 @app.route("/add_comment", methods=["POST"])
-def comment():
+def add_comment():
     if session["csrf_token"] != request.form["csrf_token"]:
         return render_template("error.html", message="Yritit jotain kiellettyä")
     workout_id = request.form["workout_id"]

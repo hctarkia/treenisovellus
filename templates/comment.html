@@ -19,6 +19,12 @@ Kuvaus: {{ workout[4] }}
 </form>
 {% endif %}
 <hr>
+{% for comments in results %}
+Käyttäjä: {{ comments[0] }} | Päiväys: {{ comments[1] }}
+<p>
+{{ comments[2] }}
+<hr>
+{% endfor %}
 <form action="/add_comment" method="POST">
 <label for="comment">Kommentoi:</label><br>
 <textarea name="comment" rows="3" cols="40"></textarea><br>
@@ -26,13 +32,6 @@ Kuvaus: {{ workout[4] }}
 <input type="hidden" name="workout_id" value="{{ workout[5] }}">
 <input type="submit" value="Lähetä">
 </form>
-<hr>
-{% for comments in results %}
-Käyttäjä: {{ comments[0] }} | Päiväys: {{ comments[1] }}
-<p>
-{{ comments[2] }}
-<hr>
-{% endfor %}
 {% else %}
 <p>Kirjaudu sisään käyttääksesi sovellusta</p>
 {% endif %}
