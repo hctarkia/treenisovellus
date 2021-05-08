@@ -15,13 +15,16 @@ Harjoitus: {{ workout[2] }} | Kesto: {{ workout[3] }}
 <p>
 Kuvaus: {{ workout[4] }}
 <p>
-<form action="/comment" method="POST">
+<form action="/add_comment" method="POST">
+<label for="comment">Kommentoi:</label><br>
+<textarea name="comment" rows="3" cols="40"></textarea><br>
+<input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
+<input type="hidden" name="workout_id" value="{{ workout[5] }}">
+<input type="submit" value="Lähetä">
+</form>
+<form action="/comments" method="GET">
 <input type="hidden" name="workout_id" value="{{ workout[5] }}">
 <input type="submit" value="Näytä kommentit">
-</form>
-<form action="/show" method="GET">
-<input type="hidden" name="workout_id" value="{{ workout[5] }}">
-<input type="submit" value="Lisää kommentti">
 </form>
 {% if session.user_id == workout[6] %}
 <form action="/delete" method="POST">

@@ -21,6 +21,3 @@ def delete(id):
     sql = "UPDATE comments SET visible=0 WHERE id=:id"
     db.session.execute(sql, {"id":id})
     db.session.commit()
-
-def comment(id):
-    sql = ""

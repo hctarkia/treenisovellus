@@ -88,19 +88,23 @@ def profile():
 def search():
     return render_template("search.html")
 
-@app.route("/show")
+@app.route("/comments")
 def show():
     workout_id = request.form["workout_id"]
     workout = workouts.get_workout(workout_id)
     results = comments.get_comments(workout_id)
-    return render_template("show.html", workout=workout, results=results)
+    return render_template("comment.html", workout=workout, results=results)
 
-#@app.route("/comment", methods=["POST"])
-#def comment():
-#    workout_id = request.form["workout_id"]
-#    workout = workouts.get_workout(workout_id)
-#    results = comments.comment(workout_id)
-#    return render_template("comment.html", workout=workout, results=results)
+@app.route("/add_comment", methods=["POST"])
+def comment():
+    if session["csrf_token"] != request.form["csrf_token"]:
+        return render_template("error.html", message="Yritit jotain kiellettyä")
+    workout_id = request.form["workout_id"]
+    comment = request.form["comment"]
+    if comments.add(workout_id, comment):
+        return redirect("/comment")
+    else:
+        return render_template("error.html", message="Lähetys ei onnistunut")
 
 @app.route("/delete", methods=["POST"])
 def delete():
