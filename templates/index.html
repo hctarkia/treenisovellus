@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 {% extends "layout.html" %}
 {% block title %}Etusivu{% endblock %}
 {% block content %}
@@ -16,15 +17,15 @@ Kuvaus: {{ workout[4] }}
 <p>
 <form action="/comment" method="POST">
 <input type="hidden" name="workout_id" value="workout[5]">
-<input type="submit" name="Näytä kommentit">
+<input type="submit" value="Näytä kommentit">
 </form>
 <form action="/show" method="GET">
 <input type="hidden" name="workout_id" value="workout[5]">
-<input type="submit"name="Lisää kommentti">
+<input type="submit" value="Lisää kommentti">
 </form>
 <form action="/delete" method="POST">
 <input type="hidden" name="workout_id" value="workout[5]">
-<input type="submit"name="Poista">
+<input type="submit" value="Poista">
 </form>
 <hr>
 {% endfor %}
