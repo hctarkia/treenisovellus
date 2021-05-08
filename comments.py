@@ -1,7 +1,7 @@
 from db import db
 import users
 
-def add(workout_id, comment):
+def add_comment(workout_id, comment):
     user_id = users.user_id()
     if user_id == 0:
         return False
