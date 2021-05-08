@@ -102,7 +102,7 @@ def comment():
     workout_id = request.form["workout_id"]
     comment = request.form["comment"]
     if comments.add(workout_id, comment):
-        return redirect("/comment")
+        return redirect("/comments")
     else:
         return render_template("error.html", message="Lähetys ei onnistunut")
 
