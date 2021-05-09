@@ -1,7 +1,7 @@
 from app import app
 from db import db
 from flask import render_template, request, redirect, session
-import users, workouts, comments
+import users, messages, workouts
 
 @app.route("/")
 def index():
@@ -88,12 +88,12 @@ def profile():
 def search():
     return render_template("search.html")
 
-@app.route("/comments")
-def comments():
+@app.route("/show_comments")
+def show_comments():
     workout_id = request.form["workout_id"]
     workout = workouts.get_workout(workout_id)
-    results = comments.get_comments(workout_id)
-    return render_template("comment.html", workout=workout, results=results)
+    results = messages.get_comments(workout_id)
+    return render_template("comments.html", workout=workout, results=results)
 
 @app.route("/add_comment", methods=["POST"])
 def add_comment():
@@ -101,8 +101,12 @@ def add_comment():
         return render_template("error.html", message="Yritit jotain kiellettyä")
     workout_id = request.form["workout_id"]
     comment = request.form["comment"]
-    if comments.add_comment(workout_id, comment):
-        return redirect("/comments")
+    if len(comment) > 5000:
+        return render_template("error.html", message="Liian pitkä kuvaus")
+    elif len(comment) == 0:
+        return render_template("error.html", message="Lisää kommentti")
+    if messages.add(workout_id, comment):
+        return redirect("/")
     else:
         return render_template("error.html", message="Lähetys ei onnistunut")
 

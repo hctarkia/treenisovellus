@@ -1,38 +1,13 @@
 <!DOCTYPE html>
 {% extends "layout.html" %}
-{% block title %}Kommentoi{% endblock %}
+{% block title %}Tulokset{% endblock %}
 {% block content %}
 <h2>Kommentoi treeniä</h2>
-{% if session.user_id %}
-<p>Olet kirjautunut nimellä {{ session.username }}</p>
 <hr>
-Käyttäjä: {{ workout[0] }} | Päiväys: {{ workout[1] }}
+{% for result in results %}
+Käyttäjä: {{ result[0] }} | Päiväys: {{ result[1] }}
 <p>
-Harjoitus: {{ workout[2] }} | Kesto: {{ workout[3] }}
-<p>
-Kuvaus: {{ workout[4] }}
-<p>
-{% if session.user_id == workout[6] %}
-<form action="/delete" method="POST">
-<input type="hidden" name="workout_id" value="{{ workout[5] }}">
-<input type="submit" value="Poista">
-</form>
-{% endif %}
-<hr>
-{% for comments in results %}
-Käyttäjä: {{ comments[0] }} | Päiväys: {{ comments[1] }}
-<p>
-{{ comments[2] }}
+Kommentti: {{ result[2] }}
 <hr>
 {% endfor %}
-<form action="/add_comment" method="POST">
-<label for="comment">Kommentoi:</label><br>
-<textarea name="comment" rows="3" cols="40"></textarea><br>
-<input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
-<input type="hidden" name="workout_id" value="{{ workout[5] }}">
-<input type="submit" value="Lähetä">
-</form>
-{% else %}
-<p>Kirjaudu sisään käyttääksesi sovellusta</p>
-{% endif %}
 {% endblock %}

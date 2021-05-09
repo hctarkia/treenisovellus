@@ -2,39 +2,41 @@
 {% extends "layout.html" %}
 {% block title %}Etusivu{% endblock %}
 {% block content %}
-<h2>Etusivu</h2>
-{% if session.user_id %}
-<p>Olet kirjautunut nimellä {{ session.username }}</p>
-<hr>
-<h3>Kaikki treenit</h3>
-<hr>
-{% for workout in results %}
-Käyttäjä: {{ workout[0] }} | Päiväys: {{ workout[1] }}
-<p>
-Harjoitus: {{ workout[2] }} | Kesto: {{ workout[3] }}
-<p>
-Kuvaus: {{ workout[4] }}
-<p>
-<form action="/add_comment" method="POST">
-<label for="comment">Kommentoi:</label><br>
-<textarea name="comment" rows="3" cols="40"></textarea><br>
-<input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
-<input type="hidden" name="workout_id" value="{{ workout[5] }}">
-<input type="submit" value="Lähetä">
-</form>
-<form action="/comments" method="GET">
-<input type="hidden" name="workout_id" value="{{ workout[5] }}">
-<input type="submit" value="Näytä kommentit">
-</form>
-{% if session.user_id == workout[6] %}
-<form action="/delete" method="POST">
-<input type="hidden" name="workout_id" value="{{ workout[5] }}">
-<input type="submit" value="Poista">
-</form>
-{% endif %}
-<hr>
-{% endfor %}
-{% else %}
-<p>Kirjaudu sisään käyttääksesi sovellusta</p>
-{% endif %}
+    <h2>Etusivu</h2>
+    {% if session.user_id %}
+        <p>Olet kirjautunut nimellä {{ session.username }}</p>
+        <hr>
+        <h3>Kaikki treenit</h3>
+        <hr>
+        {% for workout in results %}
+            Käyttäjä: {{ workout[0] }} | Päiväys: {{ workout[1] }}
+        <p>
+            Harjoitus: {{ workout[2] }} | Kesto: {{ workout[3] }}
+        <p>
+            Kuvaus: {{ workout[4] }}
+        <p>
+        <form action="/add_comment" method="POST">
+            <label for="comment">Kommentoi:</label><br>
+            <textarea name="comment" rows="3" cols="40"></textarea><br>
+            <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
+            <input type="hidden" name="workout_id" value="{{ workout[5] }}">
+            <input type="submit" value="Lähetä">
+        </form>
+        <form action="/show_comments" method="GET">
+            <input type="hidden" name="workout_id" value="{{ workout[5] }}">
+            <input type="submit" value="Näytä kommentit">
+        </form>
+        {% if session.user_id == workout[6] %}
+            <form action="/delete" method="POST">
+                <input type="hidden" name="workout_id" value="{{ workout[5] }}">
+                <input type="submit" value="Poista">
+            </form>
+        {% endif %}
+        <hr>
+        {% endfor %}
+    {% else %}
+        <p>Kirjaudu sisään käyttääksesi sovellusta</p>
+    {% endif %}
 {% endblock %}
+
+

@@ -1,7 +1,7 @@
 from db import db
 import users
 
-def add_comment(workout_id, comment):
+def add(workout_id, comment):
     user_id = users.user_id()
     if user_id == 0:
         return False
@@ -13,7 +13,7 @@ def add_comment(workout_id, comment):
 
 def get_comments(workout_id):
     sql = "SELECT u.username, c.date, c.comment FROM users u, comments c WHERE " \
-        "c.workout_id=:workout_id"
+        "c.workout_id=:workout_id AND u.id=c.user_id"
     result = db.session.execute(sql, {"workout_id":workout_id})
     return result.fetchall()
 
