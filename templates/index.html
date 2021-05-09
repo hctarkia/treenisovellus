@@ -9,9 +9,9 @@
     <h3>Kaikki treenit</h3>
     <hr>
     {% for workout in results %}
-    Käyttäjä: {{ workout[0] }} | Päiväys: {{ workout[1].strftime("%Y-%m-%d %H:%M:%S") }}
+    Käyttäjä: {{ workout[0] }}  |  Päiväys: {{ workout[1].strftime("%Y-%m-%d %H:%M:%S") }}
     <p>
-    Harjoitus: {{ workout[2] }} | Kesto: {{ workout[3] }} minuuttia
+    Harjoitus: {{ workout[2] }}  |  Kesto: {{ workout[3] }} minuuttia
     <p>
     Kuvaus: {{ workout[4] }}
     <p>
@@ -31,7 +31,7 @@
         <form action="/delete" method="POST">
             <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
             <input type="hidden" name="workout_id" value="{{ workout[5] }}">
-            <input type="submit" value="Poista">
+            <input type="submit" value="Poista treeni">
         </form>
     {% endif %}
     </div>
