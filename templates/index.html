@@ -9,12 +9,13 @@
     <h3>Kaikki treenit</h3>
     <hr>
     {% for workout in results %}
-        Käyttäjä: {{ workout[0] }} | Päiväys: {{ workout[1] }}
+    Käyttäjä: {{ workout[0] }} | Päiväys: {{ workout[1].strftime("%Y-%m-%d %H:%M:%S") }}
     <p>
-        Harjoitus: {{ workout[2] }} | Kesto: {{ workout[3] }} minuuttia
+    Harjoitus: {{ workout[2] }} | Kesto: {{ workout[3] }} minuuttia
     <p>
-        Kuvaus: {{ workout[4] }}
+    Kuvaus: {{ workout[4] }}
     <p>
+    <div class="comments">
     <form action="/add_comment" method="POST">
         <label for="comment">Kommentoi:</label><br>
         <textarea name="comment" rows="3" cols="40"></textarea><br>
@@ -33,6 +34,7 @@
             <input type="submit" value="Poista">
         </form>
     {% endif %}
+    </div>
     <hr>
     {% endfor %}
 {% else %}

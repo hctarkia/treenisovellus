@@ -3,9 +3,12 @@
 {% block title %}Hae treeniä{% endblock %}
 {% block content %}
     <h2>Hae treeniä</h2>
+    <hr>
+    <div class="search">
     <form action="/result" method="GET">
         <label for="query">Hakusana:</label>
         <input type="text" name="query">
         <input type="submit" value="Hae">
     </form>
+    </div>
 {% endblock %}

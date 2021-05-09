@@ -7,7 +7,7 @@ CREATE TABLE users (
 CREATE TABLE workouts (
     id SERIAL PRIMARY KEY,
     user_id INTEGER REFERENCES users,
-    date DATE,
+    sent TIMESTAMP,
     workout TEXT,
     duration INTEGER,
     description TEXT,
@@ -18,7 +18,6 @@ CREATE TABLE comments (
     id SERIAL PRIMARY KEY,
     user_id INTEGER REFERENCES users,
     workout_id INTEGER REFERENCES workouts,
-    date DATE,
-    comment TEXT,
-    visible INTEGER
+    sent TIMESTAMP,
+    comment TEXT
 );

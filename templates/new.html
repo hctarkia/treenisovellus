@@ -3,6 +3,8 @@
 {% block title %}Lisää harjoitus{% endblock %}
 {% block content %}
 <h2>Lisää harjoitus</h2>
+<hr>
+<div class="new">
 <form action="/add" method="POST">
     <label for="workout">Harjoitus:</label><br>
     <input type="text" name="workout"><br>
@@ -13,4 +15,5 @@
     <input type="submit" value="Lisää">
     <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
 </form>
+</div>
 {% endblock %}

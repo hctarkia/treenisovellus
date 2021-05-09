@@ -4,7 +4,7 @@
 {% block content %}
 <h2>Kommentoi treeniä</h2>
 <hr>
-    Käyttäjä: {{ workout[0] }} | Päiväys: {{ workout[1] }}
+    Käyttäjä: {{ workout[0] }} | Päiväys: {{ workout[1].strftime("%Y-%m-%d %H:%M:%S") }}
 <p>
     Harjoitus: {{ workout[2] }} | Kesto: {{ workout[3] }}
 <p>
@@ -14,7 +14,7 @@
     <form action="/delete" method="POST">
         <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
         <input type="hidden" name="workout_id" value="{{ workout[5] }}">
-        <input type="submit" value="Poista">
+        <input id="buttons" type="submit" value="Poista">
     </form>
 {% endif %}
 <hr>
@@ -23,11 +23,11 @@
     <textarea name="comment" rows="3" cols="40"></textarea><br>
     <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
     <input type="hidden" name="workout_id" value="{{ workout[5] }}">
-    <input type="submit" value="Lähetä">
+    <input id="buttons" type="submit" value="Lähetä">
     </form>
 <hr>
 {% for result in results %}
-        Käyttäjä: {{ result[0] }} | Päiväys: {{ result[1] }}
+        Käyttäjä: {{ result[0] }} | Päiväys: {{ result[1].strftime("%Y-%m-%d %H:%M:%S") }}
     <p>
         Kommentti: {{ result[2] }}
     <hr>
