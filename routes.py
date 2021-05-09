@@ -88,7 +88,7 @@ def profile():
 def search():
     return render_template("search.html")
 
-@app.route("/show_comments")
+@app.route("/show_comments", methods=["POST"])
 def show_comments():
     workout_id = request.form["workout_id"]
     workout = workouts.get_workout(workout_id)
@@ -112,6 +112,8 @@ def add_comment():
 
 @app.route("/delete", methods=["POST"])
 def delete():
+    if session["csrf_token"] != request.form["csrf_token"]:
+        return render_template("error.html", message="Yritit jotain kiellettyä")
     workout_id = request.form["workout_id"]
     workouts.delete(workout_id)
     return redirect("/")

@@ -24,7 +24,8 @@ def delete(id):
 
 def search(query):
     sql = "SELECT u.username, w.date, w.workout, w.duration, w.description, w.id, u.id FROM " \
-        "users u, workouts w WHERE u.id=w.user_id AND w.visible=1 AND workout LIKE :query ORDER BY w.id DESC"
+        "users u, workouts w WHERE u.id=w.user_id AND w.visible=1 AND (w.workout LIKE :query OR " \
+        "w.description LIKE :query OR u.username LIKE :query) ORDER BY w.id DESC"
     result = db.session.execute(sql, {"query":"%"+query+"%"})
     return result.fetchall()
 

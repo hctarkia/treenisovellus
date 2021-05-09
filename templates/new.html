@@ -4,13 +4,13 @@
 {% block content %}
 <h2>Lisää harjoitus</h2>
 <form action="/add" method="POST">
-<label for="workout">Harjoitus:</label><br>
-<input type="text" name="workout"><br>
-<label for="duration">Kesto (min):</label><br>
-<input type="number" name="duration" min="1" max="1440"><br>
-<label for="description">Kuvaus:</label><br>
-<textarea name="description" rows="3" cols="40"></textarea><br>
-<input type="submit" value="Lisää">
-<input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
+    <label for="workout">Harjoitus:</label><br>
+    <input type="text" name="workout"><br>
+    <label for="duration">Kesto (min):</label><br>
+    <input type="number" name="duration" min="1" max="1440"><br>
+    <label for="description">Kuvaus:</label><br>
+    <textarea name="description" rows="3" cols="40"></textarea><br>
+    <input type="submit" value="Lisää">
+    <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
 </form>
 {% endblock %}
